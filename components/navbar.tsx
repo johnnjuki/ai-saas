@@ -1,13 +1,14 @@
-import React from 'react'
-import {Button} from "@/components/ui/button";
-import {Menu} from "lucide-react";
-import {UserButton} from "@clerk/nextjs";
+import React from "react";
+import { UserButton } from "@clerk/nextjs";
 import MobileSidebar from "@/components/mobile-sidebar";
 
-export default function Navbar() {
+interface NavBarProps {
+  apiLimitCount: number;
+}
+export default function Navbar({apiLimitCount = 0}: NavBarProps) {
     return (
         <div className="flex items-center p-4">
-            <MobileSidebar />
+            <MobileSidebar apiLimitCount={apiLimitCount} />
             <div className="flex w-full justify-end">
                 <UserButton afterSignOutUrl="/" />
             </div>

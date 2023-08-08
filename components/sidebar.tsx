@@ -16,6 +16,7 @@ import {
   VideoIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import FreeCounter from "@/components/free-counter";
 
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 
@@ -62,7 +63,12 @@ const routes = [
     href: "/settings",
   },
 ];
-export default function Sidebar() {
+
+interface SidebarProps {
+  apiLimitCount: number;
+}
+
+export default function Sidebar({ apiLimitCount = 0 }: SidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -81,7 +87,12 @@ export default function Sidebar() {
             <Link
               href={route.href}
               key={route.href}
-              className={cn("group flex w-full cursor-pointer justify-start rounded-lg p-3 text-sm font-medium transition hover:bg-white/10 hover:text-white", pathname == route.href ? "text-white bg-white/10" : "text-zinc-400")}
+              className={cn(
+                "group flex w-full cursor-pointer justify-start rounded-lg p-3 text-sm font-medium transition hover:bg-white/10 hover:text-white",
+                pathname == route.href
+                  ? "bg-white/10 text-white"
+                  : "text-zinc-400",
+              )}
             >
               <div className="flex flex-1 items-center">
                 <route.icon className={cn("mr-3 h-5 w-5", route.color)} />
@@ -91,6 +102,8 @@ export default function Sidebar() {
           ))}
         </div>
       </div>
+
+      <FreeCounter apiLimitCount={apiLimitCount} />
     </div>
   );
 }
