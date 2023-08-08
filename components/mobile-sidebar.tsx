@@ -8,9 +8,10 @@ import Sidebar from "@/components/sidebar";
 
 interface MobileSidebarProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
-export default function MobileSidebar({apiLimitCount} : MobileSidebarProps) {
+export default function MobileSidebar({apiLimitCount, isPro} : MobileSidebarProps) {
   const [isMounted, setIsMounted] = useState(false);
 
   // This is a simple trick to fix hydration errors
@@ -30,7 +31,7 @@ export default function MobileSidebar({apiLimitCount} : MobileSidebarProps) {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="p-0">
-        <Sidebar  apiLimitCount={apiLimitCount}/>
+        <Sidebar  apiLimitCount={apiLimitCount} isPro={isPro}/>
       </SheetContent>
     </Sheet>
   );

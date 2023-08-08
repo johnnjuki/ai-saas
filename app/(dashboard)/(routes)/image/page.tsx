@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
 
 export default function ImagePage() {
   const proModal = useProModal();
@@ -53,8 +54,9 @@ export default function ImagePage() {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModal.onOpen();
-      }
-      console.log(error);
+      } else {
+      toast.error("Something went wrong");
+    }
     } finally {
       router.refresh();
     }
